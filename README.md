@@ -6,6 +6,7 @@
   - [Tips](#tips)
     - [Work with SOPS](#work-with-sops)
     - [Manualy install apps](#manualy-install-apps)
+    - [Manualy release](#manualy-release)
   - [Using software](#using-software)
 
 
@@ -51,9 +52,17 @@ helm upgrade -i $APP_NAME . -f values.yaml -f secrets.yaml -n $APP_NAMESPACE
 ### most of cases APP_DIR=APP_NAME=APP_NAMESPACE
 ```
 
+### Manualy release
+
+```sh
+docker run -it -v $(pwd):/app  -v $HOME/.ssh:/root/.ssh registry.gitlab.com/xom4ek/toolset/semantic-release:2.0.0 bash
+semantic-release --ci false
+```
+
 ## Using software
 
 Argocd
 helm
 semantic-release
 sops
+pre-commit-hooks
