@@ -2,3 +2,5 @@
 Chart.lock
 dbg.yaml
 keys/*
+debug*
+DS_Store
