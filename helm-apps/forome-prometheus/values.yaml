@@ -1,0 +1,344 @@
+kube-prometheus-stack:
+  fullnameOverride: "prometheus-kube-prometheus"
+  prometheus-node-exporter:
+    fullnameOverride: "prometheus-prometheus-node-exporter"
+  additionalPrometheusRulesMap:
+    rule-name:
+      groups:
+      - name: node
+        rules:
+        - alert: HostHighCpuLoad
+          annotations:
+            description: |-
+              CPU load is > 80%
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host high CPU load (instance {{ $labels.instance }})
+          expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[2m]))
+            * 100) > 80
+          for: 5m
+          labels:
+            severity: warning
+        - alert: HostOutOfMemory
+          annotations:
+            description: |-
+              Node memory is filling up (< 10% left)
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host out of memory (instance {{ $labels.instance }})
+          expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 <
+            10
+          for: 5m
+          labels:
+            severity: warning
+        - alert: HostOutOfDiskSpace
+          annotations:
+            description: |-
+              Disk is almost full (< 10% left)
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Host out of disk space (instance {{ $labels.instance }})
+          expr: (node_filesystem_avail_bytes * 100) / node_filesystem_size_bytes < 10
+            and ON (instance, device, mountpoint) node_filesystem_readonly == 0
+          for: 5m
+          labels:
+            severity: warning
+        - alert: BlackboxSslCertificateWillExpireSoon
+          annotations:
+            description: |-
+              SSL certificate expires in 30 days
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance
+              }})
+          expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 30
+          for: 1m
+          labels:
+            severity: warning
+        - alert: BlackboxSslCertificateWillExpireSoon
+          annotations:
+            description: |-
+              SSL certificate expires in 3 days
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance
+              }})
+          expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 3
+          for: 1m
+          labels:
+            severity: warning
+        - alert: BlackboxSslCertificateExpired
+          annotations:
+            description: |-
+              SSL certificate has expired already
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Blackbox SSL certificate expired (instance {{ $labels.instance
+              }})
+          expr: probe_ssl_earliest_cert_expiry - time() <= 0
+          for: 1m
+          labels:
+            severity: critical
+      - name: blackbox
+        rules:
+        - alert: BlackboxProbeHttpFailure
+          annotations:
+            description: |-
+              HTTP status code is not 200-399
+                VALUE = {{ $value }}
+                LABELS = {{ $labels }}
+            summary: Blackbox probe HTTP failure (instance {{ $labels.instance }})
+          expr: probe_http_status_code <= 199 OR probe_http_status_code >= 400
+          for: 5m
+          labels:
+            severity: critical
+      - name: pushgw
+        rules:
+        - alert: DatasetsAreMissing
+          annotations:
+            description: Target `{{ $labels.target }}` from job *{{ $labels.job }}*
+              has no datasets.
+            summary: Target {{ $labels.target }} has no datasets
+          expr: ds_list == 0
+          for: 5m
+          labels:
+            severity: critical
+        - alert: URLIsUnavailable
+          annotations:
+            description: URL `{{ $labels.target }}` is unavailable (job *{{ $labels.job
+              }}*)
+            summary: URL {{ $labels.target }} is unavailable
+          expr: url_status != 0
+          for: 5m
+          labels:
+            severity: critical
+  alertmanager:
+    config:
+      global:
+        resolve_timeout: 5m
+      route:
+        group_by:
+        - alertname
+        - datacenter
+        - app
+        group_interval: 5m
+        group_wait: 30s
+        receiver: "null"
+        repeat_interval: 12h
+        routes:
+        - matchers:
+          - alertname =~ "InfoInhibitor|Watchdog"
+          receiver: "null"
+        - continue: true
+          matchers:
+          - severity =~ "warning|critical"
+          receiver: slack-notifications
+        - matchers:
+          - alertname !~ "InfoInhibitor|Watchdog"
+          continue: true
+          receiver: grafana_oncall
+  coreDns:
+    enabled: false
+  defaultRules:
+    create: false
+  grafana:
+    enabled: false
+  kubeApiServer:
+    enabled: false
+  kubeControllerManager:
+    enabled: false
+  kubeDns:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  kubelet:
+    enabled: false
+  prometheus:
+    prometheusSpec:
+      additionalScrapeConfigs:
+      - job_name: node
+        static_configs:
+        - labels:
+            instance: bastion
+          targets:
+          - 10.240.64.17:9100
+        - labels:
+            instance: demo
+          targets:
+          - 10.240.64.4:9100
+        - labels:
+            instance: dev
+          targets:
+          - 10.240.64.104:9100
+        - labels:
+            instance: storybook
+          targets:
+          - 10.240.64.14:9100
+        - labels:
+            instance: annotation
+          targets:
+          - 10.240.64.15:9100
+        - labels:
+            instance: annotation-test
+          targets:
+          - 10.240.64.6:9100
+        - labels:
+            instance: cwl
+          targets:
+          - 10.240.64.16:9100
+      - job_name: blackbox_noauth
+        metrics_path: /probe
+        params:
+          module:
+          - http_noauth
+        relabel_configs:
+        - source_labels:
+          - __address__
+          target_label: __param_target
+        - source_labels:
+          - __param_target
+          target_label: target
+        - replacement: blackbox-prometheus-blackbox-exporter:9115
+          target_label: __address__
+        static_configs:
+        - targets:
+          - https://app.demo.forome.org
+          - https://qa.forome.dev
+          - https://port.forome.dev
+      - job_name: blackbox_auth
+        metrics_path: /probe
+        params:
+          module:
+          - http_auth_prometheus
+        relabel_configs:
+        - source_labels:
+          - __address__
+          target_label: __param_target
+        - source_labels:
+          - __param_target
+          target_label: target
+        - replacement: blackbox-prometheus-blackbox-exporter:9115
+          target_label: __address__
+        static_configs:
+        - targets:
+          - https://anfisa.forome.dev
+          - https://scicenter.forome.dev
+          - https://storybook.forome.dev
+      - honor_labels: true
+        job_name: pushgw
+        static_configs:
+        - targets:
+          - pushgateway-prometheus-pushgateway:9091
+
+prometheus-pushgateway:
+  fullnameOverride: "pushgateway-prometheus-pushgateway"
+  affinity: {}
+  containerSecurityContext: {}
+  extraArgs: []
+  extraContainers: []
+  extraVars: []
+  extraVolumeMounts: {}
+  extraVolumes: {}
+  image:
+    pullPolicy: IfNotPresent
+    repository: prom/pushgateway
+    tag: v1.4.2
+  imagePullSecrets: []
+  ingress:
+    className: ""
+    enabled: false
+    path: /
+    pathType: ImplementationSpecific
+  liveness:
+    enabled: true
+    probe:
+      httpGet:
+        path: /-/ready
+        port: 9091
+      initialDelaySeconds: 10
+      timeoutSeconds: 10
+  nameOverride: ""
+  networkPolicy: {}
+  nodeSelector: {}
+  persistentVolume:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: false
+    existingClaim: ""
+    mountPath: /data
+    size: 2Gi
+    subPath: ""
+  persistentVolumeLabels: {}
+  podAnnotations: {}
+  podDisruptionBudget: {}
+  podLabels: {}
+  priorityClassName: null
+  readiness:
+    enabled: true
+    probe:
+      httpGet:
+        path: /-/ready
+        port: 9091
+      initialDelaySeconds: 10
+      timeoutSeconds: 10
+  replicaCount: 1
+  resources: {}
+  runAsStatefulSet: false
+  securityContext:
+    fsGroup: 65534
+    runAsNonRoot: true
+    runAsUser: 65534
+  service:
+    clusterIP: ""
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+    port: 9091
+    targetPort: 9091
+    type: ClusterIP
+  serviceAccount:
+    create: true
+    name: null
+  serviceAccountLabels: {}
+  serviceAnnotations: {}
+  serviceLabels: {}
+  serviceMonitor:
+    additionalLabels: {}
+    enabled: false
+    honorLabels: true
+    metricRelabelings: []
+    namespace: monitoring
+    relabelings: []
+  strategy:
+    type: Recreate
+  tolerations: {}
+
+
+prometheus-blackbox-exporter:
+  fullnameOverride: "blackbox-prometheus-blackbox-exporter"
+  config:
+    modules:
+      http_auth_prometheus:
+        http:
+          follow_redirects: true
+          preferred_ip_protocol: ip4
+          valid_http_versions:
+          - HTTP/1.1
+          - HTTP/2.0
+        prober: http
+        timeout: 45s
+      http_noauth:
+        http:
+          follow_redirects: true
+          preferred_ip_protocol: ip4
+          valid_http_versions:
+          - HTTP/1.1
+          - HTTP/2.0
+        prober: http
+        timeout: 45s
