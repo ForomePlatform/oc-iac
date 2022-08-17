@@ -11,8 +11,8 @@ spec:
   - git:
       repoURL: {{ .Values.repoUrl }}
       revision: HEAD
-      files:
-      - path: helm-apps/**/manual.yaml
+      directories:
+      - path: "helm-apps/*"
   template:
     metadata:
       name: '{{include "cc" $ }}path[1]}}'
@@ -25,9 +25,9 @@ spec:
           - "secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml"
         repoURL: {{ .Values.repoUrl }}
         targetRevision: HEAD
-        path: '{{include "cc" $ }}path}}../'
+        path: '{{include "cc" $ }}path}}'
       destination:
-        server: '{{include "cc" $ }}cluster.address }}'
+        server: 'https://kubernetes.default.svc'
         namespace: '{{include "cc" $ }}path[1]}}'
       syncPolicy:
         syncOptions:
@@ -35,42 +35,42 @@ spec:
         retry:
           limit: 10
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: oc-iac-auto
-  namespace: argocd
-spec:
-  syncPolicy:
-    preserveResourcesOnDeletion: true
-  generators:
-  - git:
-      repoURL: {{ .Values.repoURL }}
-      revision: HEAD
-      files:
-      - path: helm-apps/**/auto.yaml
-  template:
-    metadata:
-      name: '{{include "cc" $ }}path[1]}}'
-    spec:
-      project: 'default'
-      source:
-        helm:
-          valueFiles:
-          - values.yaml
-          - "secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml"
-        repoURL: {{ .Values.repoURL }}
-        targetRevision: HEAD
-        path: '{{include "cc" $ }}path}}../'
-      destination:
-        server: '{{include "cc" $ }}cluster.address }}'
-        namespace: '{{include "cc" $ }}path[1]}}'
-      syncPolicy:
-        automated:
-          allowEmpty: true
-          prune: true
-          selfHeal: true
-        syncOptions:
-        - CreateNamespace=true
-        retry:
-          limit: 10
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: oc-iac-auto
+#   namespace: argocd
+# spec:
+#   syncPolicy:
+#     preserveResourcesOnDeletion: true
+#   generators:
+#   - git:
+#       repoURL: {{ .Values.repoURL }}
+#       revision: HEAD
+#       files:
+#       - path: helm-apps/**/auto.yaml
+#   template:
+#     metadata:
+#       name: '{{include "cc" $ }}path[1]}}'
+#     spec:
+#       project: 'default'
+#       source:
+#         helm:
+#           valueFiles:
+#           - values.yaml
+#           - "secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml"
+#         repoURL: {{ .Values.repoURL }}
+#         targetRevision: HEAD
+#         path: '{{include "cc" $ }}path}}'
+#       destination:
+#         server: 'https://kubernetes.default.svc'
+#         namespace: '{{include "cc" $ }}path[1]}}'
+#       syncPolicy:
+#         automated:
+#           allowEmpty: true
+#           prune: true
+#           selfHeal: true
+#         syncOptions:
+#         - CreateNamespace=true
+#         retry:
+#           limit: 10
