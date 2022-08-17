@@ -1,0 +1,324 @@
+argo-cd:
+  configs:
+    knownHosts:
+      data:
+        ssh_known_hosts: |
+          bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+          github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=
+          github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+          github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+          gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
+          gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
+          gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
+          ssh.dev.azure.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
+          vs-ssh.visualstudio.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
+  controller:
+    name: application-controller
+    replicas: 1
+
+    ## Argo controller commandline flags
+    args:
+      statusProcessors: "20"
+      operationProcessors: "10"
+      appResyncPeriod: "180"
+      selfHealTimeout: "5"
+
+    ## Additional command line arguments to pass to argocd-controller
+    ##
+    extraArgs: []
+
+    ## Environment variables to pass to argocd-controller
+    ##
+    env: []
+      # - name: "ARGOCD_CONTROLLER_REPLICAS"
+      #   value: ""
+
+    ## Additional volumeMounts to the controller main container.
+    volumeMounts: []
+
+    ## Additional volumes to the controller pod.
+    volumes: []
+
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 2Gi
+
+    ## Server metrics controller configuration
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: false
+      #   selector:
+      #     prometheus: kube-prometheus
+      #   namespace: monitoring
+      #   additionalLabels: {}
+      rules:
+        enabled: false
+        spec: []
+
+  ## Dex
+  dex:
+    image:
+      repository: ghcr.io/dexidp/dex
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: false
+
+    ## Environment variables to pass to the Dex server
+    ##
+    env: []
+
+    ## Annotations to be added to the Dex server pods
+
+    ## Additional volumeMounts to the controller main container.
+    volumeMounts:
+      - name: static-files
+        mountPath: /shared
+
+    ## Additional volumes to the controller pod.
+    volumes:
+      - name: static-files
+        emptyDir: {}
+
+    # nodeSelector:
+    #   node-role.kubernetes.io/dmz: ""
+    # tolerations:
+    # - key: "node-role.kubernetes.io/dmz"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+
+    resources:
+      limits:
+        cpu: 15m
+        memory: 105Mi
+      requests:
+        cpu: 15m
+        memory: 105Mi
+
+  ## Redis
+  redis:
+    enabled: true
+    image:
+      tag: 7.0.0-bullseye
+    resources:
+      limits:
+        cpu: 50m
+        memory: 256Mi
+      requests:
+        cpu: 15m
+        memory: 256Mi
+
+    volumeMounts: []
+    volumes: []
+    # nodeSelector:
+    #   node-role.kubernetes.io/dmz: ""
+    # tolerations:
+    # - key: "node-role.kubernetes.io/dmz"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+
+  ## Server
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: clusterissuer-prom
+      # ingressClassName: ""
+      hosts:
+        - argocd.forome.dev
+      paths:
+        - /
+      pathType: Prefix
+      tls:
+        - secretName: argocd-tls-certificate
+          hosts:
+            - argocd.forome.dev
+    config:
+      statusbadge.enabled: "true"
+      helm.valuesFileSchemes: secrets, https
+      url: https://argocd.forome.dev
+    rbacConfig:
+      policy.default: role:readonly
+    replicas: 1
+    ## Additional command line arguments to pass to argocd-server
+    ##
+    extraArgs:
+      - --insecure
+
+    ## Environment variables to pass to argocd-server
+    ##
+    env: []
+
+    ## Additional volumeMounts to the server main container.
+    volumeMounts: []
+
+    ## Additional volumes to the controller pod.
+    volumes: []
+
+    ## Node selectors and tolerations for server scheduling to nodes with taints
+    ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+    ##
+    # nodeSelector:
+    #   node-role.kubernetes.io/dmz: ""
+    # tolerations:
+    # - key: "node-role.kubernetes.io/dmz"
+    #   operator: "Exists"
+    #   effect: "NoSchedule"
+    affinity: {}
+
+    priorityClassName: ""
+
+    ## Labels to set container specific security contexts
+    containerSecurityContext:
+      {}
+      # capabilities:
+      #   drop:
+      #     - all
+      # readOnlyRootFilesystem: true
+
+    resources:
+      limits:
+        cpu: 600m
+        memory: 1Gi
+      requests:
+        cpu: 300m
+        memory: 512Mi
+
+    ## Certificate configuration
+    certificate:
+      enabled: false
+      domain: argocd.example.com
+      issuer: {}
+      additionalHosts: []
+
+    ## Server metrics service configuration
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: false
+
+  ## Repo Server
+  repoServer:
+    replicas: 1
+    ## Additional command line arguments to pass to argocd-repo-server
+    ##
+    extraArgs: {}
+
+    ## Environment variables to pass to argocd-repo-server
+    ##
+    env:
+      - name: "SOPS_GCP_KMS_IDS"
+        value: "projects/em-infrastructure/locations/global/keyRings/sops/cryptoKeys/sops-key"
+      - name: HELM_PLUGINS
+        value: /custom-tools/helm-plugins/
+      - name: HELM_SECRETS_SOPS_PATH
+        value: /custom-tools/sops
+      - name: HELM_SECRETS_KUBECTL_PATH
+        value: /custom-tools/kubectl
+
+    ## Additional volumeMounts to the repo server main container.
+    volumeMounts:
+      - mountPath: /custom-tools
+        name: custom-tools
+      - mountPath: /helm-secrets-private-keys
+        name: helm-secrets-private-keys
+    ## Additional volumes to the repo server pod.
+    volumes:
+      - name: custom-tools
+        emptyDir: {}
+      - name: helm-secrets-private-keys
+        secret:
+          defaultMode: 420
+          secretName: helm-secrets-private-keys
+    resources:
+      limits:
+        cpu: 300m
+        memory: 1Gi
+      requests:
+        cpu: 300m
+        memory: 1Gi
+
+    ## Repo server service configuration
+    service:
+      annotations: {}
+      labels: {}
+      port: 8081
+      portName: https-repo-server
+
+    ## Repo server metrics service configuration
+    metrics:
+      enabled: false
+      serviceMonitor:
+        enabled: false
+      #   selector:
+      #     prometheus: kube-prometheus
+      #   namespace: monitoring
+      #   additionalLabels: {}
+    initContainers:
+      - args:
+        - |
+          mkdir -p /custom-tools/helm-plugins
+          wget -qO- https://github.com/jkroepke/helm-secrets/releases/download/v${HELM_SECRETS_VERSION}/helm-secrets.tar.gz | tar -C /custom-tools/helm-plugins -xzf-;
+
+          wget -qO /custom-tools/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+          wget -qO /custom-tools/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+
+          chmod +x /custom-tools/*
+        command:
+        - sh
+        - -ec
+        env:
+        - name: HELM_SECRETS_VERSION
+          value: 3.11.0
+        - name: SOPS_VERSION
+          value: 3.7.1
+        - name: KUBECTL_VERSION
+          value: 1.19.15
+        image: docker.io/alpine:3.15.0
+        imagePullPolicy: IfNotPresent
+        name: download-tools
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsGroup: 10001
+          runAsUser: 10001
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
+        # - name: download-tools
+        #   image: hub/library/alpine:3.8
+        #   command: [sh, -c]
+        #   args:
+        #     - >-
+        #       wget -O argocd-vault-plugin
+        #       https://github.com/IBM/argocd-vault-plugin/releases/download/v1.6.0/argocd-vault-plugin_1.6.0_linux_amd64 &&
+        #       chmod +x argocd-vault-plugin &&
+        #       mv argocd-vault-plugin /custom-tools/
+        #   volumeMounts:
+        #     - mountPath: /custom-tools
+        #       name: custom-tools
+
+
+  applicationSet:
+    args:
+      policy: create-update
+    resources:
+      limits:
+        cpu: 150m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+  notifications:
+    # -- Enable Notifications controller
+    enabled: true
