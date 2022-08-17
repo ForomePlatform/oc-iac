@@ -30,10 +30,19 @@ loki:
         #     http_client_timeout: "20s"
         #     consistent_reads: true
     limits_config:
-      enforce_metric_name: false
       reject_old_samples: true
-      reject_old_samples_max_age: 168h
       max_entries_limit_per_query: 5000
+      enforce_metric_name: false
+      reject_old_samples_max_age: 24h
+      max_query_length: 100h
+      max_streams_per_user: 0
+      max_global_streams_per_user: 0
+      ingestion_rate_strategy: 'global'
+      ingestion_rate_mb: 10
+      ingestion_burst_size_mb: 20
+      max_cache_freshness_per_query: 20m
+      split_queries_by_interval: 60m
+      retention_period: 100h
     schema_config:
       configs:
       - from: 2020-10-24
@@ -46,6 +55,11 @@ loki:
     server:
       http_listen_port: 3100
       grpc_listen_port: 9095
+      grpc_server_max_recv_msg_size: 20971520
+      grpc_server_max_send_msg_size: 20971520
+      grpc_server_max_concurrent_streams: 0
+      http_server_write_timeout: 1m
+      grpc_server_min_time_between_pings: '10s'
     storage_config:
       boltdb_shipper:
         active_index_directory: /data/loki/boltdb-shipper-active
@@ -57,8 +71,8 @@ loki:
     chunk_store_config:
       max_look_back_period: 0s
     table_manager:
-      retention_deletes_enabled: false
-      retention_period: 0s
+      retention_deletes_enabled: true
+      retention_period: 100h
     compactor:
       working_directory: /data/loki/boltdb-shipper-compactor
       shared_store: filesystem
@@ -111,7 +125,7 @@ loki:
     type: RollingUpdate
 
 promtail:
-  enabled: true
+  enabled: false
   config:
     clients:
       - url: http://{{ .Release.Name }}:3100/loki/api/v1/push
