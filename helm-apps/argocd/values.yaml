@@ -1,3 +1,5 @@
+repoUrl: https://github.com/ForomePlatform/oc-iac.git
+
 argo-cd:
   configs:
     knownHosts:
@@ -141,7 +143,7 @@ argo-cd:
             - argocd.forome.dev
     config:
       statusbadge.enabled: "true"
-      helm.valuesFileSchemes: secrets, https
+      helm.valuesFileSchemes: secrets, https, secrets+gpg-import, gpg-import
       url: https://argocd.forome.dev
     rbacConfig:
       policy.default: role:readonly

@@ -1,0 +1,117 @@
+
+loki:
+  config:
+    # existingSecret:
+    auth_enabled: false
+
+    memberlist:
+      join_members:
+        # the value must be defined as string to be evaluated when secret manifest is being generating
+        - '{{ include "loki.fullname" . }}-memberlist'
+
+    ingester:
+      chunk_idle_period: 3m
+      chunk_block_size: 262144
+      chunk_retain_period: 1m
+      max_transfer_retries: 0
+      wal:
+        dir: /data/loki/wal
+      lifecycler:
+        ring:
+          replication_factor: 1
+
+        ## Different ring configs can be used. E.g. Consul
+        # ring:
+        #   store: consul
+        #   replication_factor: 1
+        #   consul:
+        #     host: "consul:8500"
+        #     prefix: ""
+        #     http_client_timeout: "20s"
+        #     consistent_reads: true
+    limits_config:
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 168h
+      max_entries_limit_per_query: 5000
+    schema_config:
+      configs:
+      - from: 2020-10-24
+        store: boltdb-shipper
+        object_store: filesystem
+        schema: v11
+        index:
+          prefix: index_
+          period: 24h
+    server:
+      http_listen_port: 3100
+      grpc_listen_port: 9095
+    storage_config:
+      boltdb_shipper:
+        active_index_directory: /data/loki/boltdb-shipper-active
+        cache_location: /data/loki/boltdb-shipper-cache
+        cache_ttl: 24h         # Can be increased for faster performance over longer query periods, uses more disk space
+        shared_store: filesystem
+      filesystem:
+        directory: /data/loki/chunks
+    chunk_store_config:
+      max_look_back_period: 0s
+    table_manager:
+      retention_deletes_enabled: false
+      retention_period: 0s
+    compactor:
+      working_directory: /data/loki/boltdb-shipper-compactor
+      shared_store: filesystem
+
+  persistence:
+    enabled: true
+    accessModes:
+    - ReadWriteOnce
+    size: 10Gi
+    storageClassName:
+
+  rbac:
+    create: true
+    pspEnabled: true
+
+  replicas: 1
+
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 1
+      memory: 1Gi
+
+  securityContext:
+    fsGroup: 10001
+    runAsGroup: 10001
+    runAsNonRoot: true
+    runAsUser: 10001
+
+  containerSecurityContext:
+    readOnlyRootFilesystem: true
+
+  service:
+    type: ClusterIP
+    nodePort:
+    port: 3100
+    annotations: {}
+    labels: {}
+    targetPort: http-metrics
+
+  serviceAccount:
+    create: true
+    name:
+    annotations: {}
+    automountServiceAccountToken: true
+
+  updateStrategy:
+    type: RollingUpdate
+
+promtail:
+  enabled: true
+  config:
+    clients:
+      - url: http://{{ .Release.Name }}:3100/loki/api/v1/push
