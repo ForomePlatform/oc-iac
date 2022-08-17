@@ -90,7 +90,7 @@ generateNotes:
           hidden: false
         - type: 'chore'
           section: 'Other'
-          hidden: false
+          hidden: true
         - type: 'ci'
           section: '🛺 CI/CD'
           hidden: false
