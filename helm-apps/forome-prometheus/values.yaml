@@ -1,4 +1,8 @@
 kube-prometheus-stack:
+  prometheusOperator:
+    enabled: true
+    denyNamespaces:
+      - openshift-monitoring
   fullnameOverride: "prometheus-kube-prometheus"
   prometheus-node-exporter:
     fullnameOverride: "prometheus-prometheus-node-exporter"
