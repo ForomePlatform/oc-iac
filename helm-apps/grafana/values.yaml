@@ -838,9 +838,9 @@ oncall:
 
   podAnnotations: {}
 
-  podSecurityContext: {}
-    # sysctls:
-    # - name: net.core.somaxconn
-    #   value: "1024"
+  podSecurityContext:
+    sysctls:
+    - name: net.core.somaxconn
+      value: "1024"
 
   securityContext: {}
