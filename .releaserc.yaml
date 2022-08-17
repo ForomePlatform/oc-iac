@@ -138,8 +138,8 @@ prepare:
     assets: ['CHANGELOG.md']
 
 # Responsible for publishing the release.
-publish: false
-  # - path: '@semantic-release/gitlab'
+publish:
+  - path: '@semantic-release/github'
     # Publish a GitLab release
     #  (https://docs.gitlab.com/ce/user/project/releases/index.html#add-release-notes-to-git-tags)
 
