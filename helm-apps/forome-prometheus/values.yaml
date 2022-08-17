@@ -237,6 +237,7 @@ kube-prometheus-stack:
           - pushgateway-prometheus-pushgateway:9091
 
 prometheus-pushgateway:
+  fullnameOverride: "pushgateway-prometheus-pushgateway"
   affinity: {}
   containerSecurityContext: {}
   extraArgs: []
@@ -244,7 +245,6 @@ prometheus-pushgateway:
   extraVars: []
   extraVolumeMounts: {}
   extraVolumes: {}
-  fullnameOverride: "pushgateway"
   image:
     pullPolicy: IfNotPresent
     repository: prom/pushgateway
