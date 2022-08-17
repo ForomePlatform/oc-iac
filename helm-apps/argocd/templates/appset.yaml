@@ -9,10 +9,10 @@ spec:
     preserveResourcesOnDeletion: true
   generators:
   - git:
-      repoURL: git@github.com:ForomePlatform/oc-iac.git
+      repoURL: {{ .Values.repoURL }}
       revision: HEAD
       files:
-      - path: helm/**/manual.yaml
+      - path: helm-apps/**/manual.yaml
   template:
     metadata:
       name: '{{include "cc" $ }}path[1]}}'
@@ -23,7 +23,7 @@ spec:
           valueFiles:
           - values.yaml
           - "secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml"
-        repoURL: git@github.com:ForomePlatform/oc-iac.git
+        repoURL: {{ .Values.repoURL }}
         targetRevision: HEAD
         path: '{{include "cc" $ }}path}}../'
       destination:
@@ -45,10 +45,10 @@ spec:
     preserveResourcesOnDeletion: true
   generators:
   - git:
-      repoURL: git@github.com:ForomePlatform/oc-iac.git
+      repoURL: {{ .Values.repoURL }}
       revision: HEAD
       files:
-      - path: helm/**/auto.yaml
+      - path: helm-apps/**/auto.yaml
   template:
     metadata:
       name: '{{include "cc" $ }}path[1]}}'
@@ -59,7 +59,7 @@ spec:
           valueFiles:
           - values.yaml
           - "secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml"
-        repoURL: git@github.com:ForomePlatform/oc-iac.git
+        repoURL: {{ .Values.repoURL }}
         targetRevision: HEAD
         path: '{{include "cc" $ }}path}}../'
       destination:

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: helm-secrets-private-keys
+type: Opaque
+stringData:
+  key.asc: |
+{{ .Values.gpgkey | nindent 4}}
+  githubtoken: |
+{{ .Values.githubtoken | nindent 4}}
