@@ -5,8 +5,10 @@
     - [Install pre-commit and sops](#install-pre-commit-and-sops)
   - [Tips](#tips)
     - [Work with SOPS](#work-with-sops)
-    - [Manualy install apps](#manualy-install-apps)
-    - [Manualy release](#manualy-release)
+      - [Encrypt](#encrypt)
+      - [Decrypt](#decrypt)
+    - [Manually install apps](#manually-install-apps)
+    - [Manually release](#manually-release)
   - [Using software](#using-software)
 
 
@@ -31,28 +33,28 @@ pre-commit install --hook-type commit-msg
 
 ### Work with SOPS
 
-Encrypt
-```
+#### Encrypt
+
+```sh
 ## Enctrypt full of file
 sops -e -i test.yaml
 ```
 
-Decypt
-```
+#### Decrypt
+```sh
 $ sops -d -i test.yaml
 ```
-### Manualy install apps
+### Manually install apps
 
 ```sh
 cp $APP_DIR
 helm dependency update
 sops -d -i secrets.yaml
 helm upgrade -i $APP_NAME . -f values.yaml -f secrets.yaml -n $APP_NAMESPACE
-
-### most of cases APP_DIR=APP_NAME=APP_NAMESPACE
+most of cases APP_DIR=APP_NAME=APP_NAMESPACE
 ```
 
-### Manualy release
+### Manually release
 
 ```sh
 docker run -it -v $(pwd):/app  -v $HOME/.ssh:/root/.ssh registry.gitlab.com/xom4ek/toolset/semantic-release:2.0.0 bash
