@@ -1,0 +1,12 @@
+apiVersion: v2
+name: loki
+appVersion: v1.0.0
+version: 1.0.0
+description: 'Umbrella wraper for Loki chart'
+dependencies:
+  - name: loki
+    repository: https://grafana.github.io/helm-charts
+    version: 2.14.0
+  - name: promtail
+    repository: https://grafana.github.io/helm-charts
+    version: 6.2.2
