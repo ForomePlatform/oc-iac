@@ -58,6 +58,7 @@ most of cases APP_DIR=APP_NAME=APP_NAMESPACE
 
 ```sh
 docker run -it -v $(pwd):/app  -v $HOME/.ssh:/root/.ssh registry.gitlab.com/xom4ek/toolset/semantic-release:2.0.0 bash
+export GITHUB_TOKEN=$GITHUB_TOKEN_FOR_RELEASE
 semantic-release --ci false
 ```
 
