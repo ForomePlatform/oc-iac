@@ -1,0 +1,12 @@
+apiVersion: v2
+name: grafana
+version: 1.0.0
+appVersion: 1.0.0
+description: meta chart for grafana
+dependencies:
+- name: grafana
+  repository: "https://grafana.github.io/helm-charts"
+  version: "6.30.*"
+- name: oncall
+  version: "*.*.*"
+  # repository: "https://grafana.github.io/helm-charts"
