@@ -733,6 +733,7 @@ oncall:
   image:
     # Grafana OnCall docker image repository
     repository: grafana/oncall
+    tag: v1.0.22
     pullPolicy: IfNotPresent
 
   # Whether to create additional service for external connections
@@ -838,9 +839,5 @@ oncall:
 
   podAnnotations: {}
 
-  podSecurityContext:
-    sysctls:
-    - name: net.core.somaxconn
-      value: "1024"
-
+  podSecurityContext: {}
   securityContext: {}
