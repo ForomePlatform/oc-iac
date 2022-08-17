@@ -12,7 +12,7 @@ spec:
   - cluster-logging-operator-metrics
   duration: 8760h0m0s
   issuerRef:
-    kind: ClusterIssuer
+    kind: Issuer
     name: selfsigned-issuer
   renewBefore: 4380h0m0s
   secretName: collector-metrics
@@ -26,7 +26,7 @@ spec:
   - client auth
 ---
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
   name: selfsigned-issuer
 spec:
