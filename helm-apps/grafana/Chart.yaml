@@ -9,4 +9,4 @@ dependencies:
   version: "6.30.*"
 - name: oncall
   version: "*.*.*"
-  repository: "https://grafana.github.io/helm-charts"
+  # repository: "https://grafana.github.io/helm-charts"
