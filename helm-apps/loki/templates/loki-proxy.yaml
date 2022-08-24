@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loki-proxy
+spec:
+  selector:
+    matchLabels:
+      app: loki-proxy
+  template:
+    metadata:
+      labels:
+        app: loki-proxy
+    spec:
+      serviceAccount: loki
+      serviceAccountName: loki
+      containers:
+      - name: nginx
+        image: beevelop/nginx-basic-auth
+        ports:
+        - containerPort: 80
+        env:
+          - name: FORWARD_PORT
+            value: "3100"
+          - name: FORWARD_HOST
+            value: "loki"
+        envFrom:
+          - secretRef:
+              name: loki-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki-proxy
+spec:
+  selector:
+    app: loki-proxy
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: loki-proxy
+type: Opaque
+stringData:
+  HTPASSWD: "{{ .Values.lokiPassword }}"
