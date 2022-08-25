@@ -1,0 +1,17 @@
+kind: app
+version: v3
+metadata:
+  name: anfisa-test
+  description: "Forome anfisa test"
+  labels:
+    hostname: openshift
+spec:
+  uri: "https://test.forome.dev"
+  public_addr: test.forome.dev
+  rewrite:
+    redirect:
+      - "test.forome.dev"
+    headers:
+      - Name: Host
+        Value: test.forome.dev
+  insecure_skip_verify: true

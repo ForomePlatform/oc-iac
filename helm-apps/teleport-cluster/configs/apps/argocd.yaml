@@ -1,0 +1,10 @@
+kind: app
+version: v3
+metadata:
+  name: argocd
+  description: "Forome argocd"
+  labels:
+    hostname: openshift
+spec:
+  uri: "http://argocd-server.argocd.svc.cluster.local"
+  insecure_skip_verify: true

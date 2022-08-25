@@ -72,3 +72,6 @@ helm
 semantic-release
 sops
 pre-commit-hooks
+teleport
+grafana
+prometheus

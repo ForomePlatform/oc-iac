@@ -2,12 +2,3 @@
 creation_rules:
   - path_regex: (secrets\.yaml)
     pgp: 'AA13F9CA4C303D151079DB58A0DDC3025026FBFF'
-    # gcp_kms: projects/em-infrastructure/locations/global/keyRings/sops/cryptoKeys/sops-key
-  # - path_regex: '.*(\.sops\.yaml)'
-  #   gcp_kms: projects/em-infrastructure/locations/global/keyRings/sops/cryptoKeys/sops-key
-  # - path_regex: ansible
-  #   encrypted_regex: '.*(password|username)'
-  #   gcp_kms: projects/em-infrastructure/locations/global/keyRings/sops/cryptoKeys/sops-key
-  # - path_regex: helm
-  #   encrypted_regex: '.*(password|username)'
-  #   gcp_kms: projects/em-infrastructure/locations/global/keyRings/sops/cryptoKeys/sops-key

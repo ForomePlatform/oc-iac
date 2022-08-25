@@ -1,0 +1,17 @@
+kind: app
+version: v3
+metadata:
+  name: grafana
+  description: "Forome grafana"
+  labels:
+    hostname: openshift
+spec:
+  # public_addr: grafana.teleport.forome.dev
+  uri: "http://grafana.grafana.svc.cluster.local"
+  # rewrite:
+    # redirect:
+    #   - "grafana.forome.dev"
+    # headers:
+    #   - Name: Host
+    #     Value: grafana.forome.dev
+  insecure_skip_verify: true

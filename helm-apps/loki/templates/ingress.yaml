@@ -1,0 +1,23 @@
+# Source: loki/charts/loki/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loki
+  annotations:
+    cert-manager.io/cluster-issuer: clusterissuer-prom
+spec:
+  rules:
+    - host: "loki.forome.dev"
+      http:
+        paths:
+          - backend:
+              service:
+                name: loki-proxy
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+  - hosts:
+    - loki.forome.dev
+    secretName: loki.forome.dev-tls

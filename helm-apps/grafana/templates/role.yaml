@@ -11,3 +11,32 @@ subjects:
 - kind: ServiceAccount
   name: grafana-oncall
   namespace: grafana
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-monitoring-view
+  namespace: grafana
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: openshift-cluster-monitoring-view
+subjects:
+- kind: ServiceAccount
+  name: grafana
+  namespace: grafana
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-anyuid
+  namespace: grafana
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: grafana
+  namespace: grafana
+---

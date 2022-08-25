@@ -1,0 +1,78 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-application-controller-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-application-controller-anyid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-applicationset-controller-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-applicationset-controller-anyid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-dex-server-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-dex-server-anyid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-notifications-controller-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-notifications-controller-anyid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-repo-server-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-repo-server-anyid
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-server-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-server-anyid

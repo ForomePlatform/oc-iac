@@ -4,3 +4,4 @@ dbg.yaml
 keys/*
 debug*
 DS_Store
+.DS_Store

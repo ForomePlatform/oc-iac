@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: teleport-cluster
+  namespace: {{ .Release.Namespace }}
+data:
+  teleport.yaml: |
+
+    version: v2
+    teleport:
+      log:
+        severity: INFO
+        output: stderr
+        format:
+          output: text
+          extra_fields: ["timestamp","level","component","caller"]
+    auth_service:
+      enabled: true
+      cluster_name: {{ .Values.clusterName }}
+      authentication:
+        type: local
+        second_factor: off
+      proxy_listener_mode: multiplex
+      tokens:
+        - app,db,kube,node,windowsdesktop:{{.Values.teleportToken}}
+    kubernetes_service:
+      enabled: true
+      listen_addr: 0.0.0.0:443
+      kube_cluster_name: oc-ibm
+    proxy_service:
+      public_addr: '{{ .Values.clusterName }}:443'
+      enabled: true
+      https_keypairs:
+      - key_file: /etc/teleport-tls/tls.key
+        cert_file: /etc/teleport-tls/tls.crt
+    ssh_service:
+      enabled: false
+    app_service:
+      enabled: true
+      resources:
+      - labels:
+          "hostname": "openshift"

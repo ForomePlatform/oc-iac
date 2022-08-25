@@ -1,0 +1,1 @@
+{{- define "cc" -}}{{ printf "{{" }}{{- end -}}
