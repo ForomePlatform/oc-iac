@@ -1,3 +1,60 @@
+## [2.0.0](https://github.com/ForomePlatform/oc-iac/compare/1.0.0...2.0.0) (2022-08-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **teleport:** add teleport
+
+### 📔 Docs
+
+* add little instruction for oncall connect ([58d79ca](https://github.com/ForomePlatform/oc-iac/commit/58d79ca64cd0ad9f66bdba21fb862d876973dcda))
+* add more command for semantic-release ([68f8cc5](https://github.com/ForomePlatform/oc-iac/commit/68f8cc587b4fc55a2f582e80d2f12cd71ea0a096))
+* add using software ([6f2638f](https://github.com/ForomePlatform/oc-iac/commit/6f2638ffb8180c7ce83a3ef27840c099198ed2e3))
+
+
+### 🚀 Features
+
+* add applicationsets for argocd ([b1170d3](https://github.com/ForomePlatform/oc-iac/commit/b1170d38b8fe0c3c8cf367331dd9cfeec77b99fb))
+* add github oauth ([abe27d2](https://github.com/ForomePlatform/oc-iac/commit/abe27d281b4e3378d2b643beb35990dc4faeef15))
+* add to loki anyuid ([f3b9902](https://github.com/ForomePlatform/oc-iac/commit/f3b9902ed818b49a28f51eab7f1f4ddf7b36926c))
+* argocd secrets and applicationsets ([558fa06](https://github.com/ForomePlatform/oc-iac/commit/558fa060c21f285557999ed04bad6358c5f66906))
+* bump grafana add anyuid role ([5c8a282](https://github.com/ForomePlatform/oc-iac/commit/5c8a2825e36bb31656c461e78476165814d637d0))
+* loki-proxy for external access ([f5dedee](https://github.com/ForomePlatform/oc-iac/commit/f5dedee33f85e75134df94e513d8da331864c710))
+* **grafana:** add jwks teleport ([7289046](https://github.com/ForomePlatform/oc-iac/commit/728904625b5dab781fa24a3a815598a6cdae9616))
+* **grafana:** enable first time grafana ([26a63a6](https://github.com/ForomePlatform/oc-iac/commit/26a63a6fd0d963b362b5bed10353e323408d2d48))
+* **logging:** add openshiftlogging ([3db161e](https://github.com/ForomePlatform/oc-iac/commit/3db161e5a8be65cf375afdf39d984425b8977822))
+* **logging:** add openshiftlogging ([ceec8a2](https://github.com/ForomePlatform/oc-iac/commit/ceec8a2164971ade60ec09c4f8f8fa5cfa4e8c7e))
+* **loki:** first time try ([844bbdf](https://github.com/ForomePlatform/oc-iac/commit/844bbdf7f6053348e1e16f3e17eb3b42cc565c64))
+* **monitoring:** monitoring to git ([9e81778](https://github.com/ForomePlatform/oc-iac/commit/9e81778916e8badf54ea2c12ed54947da2203677))
+* **oncall:** enable oncall ([47b63b7](https://github.com/ForomePlatform/oc-iac/commit/47b63b72db9c9976bf2019f72724cb41eb3e5371))
+* **prometheus:** add federate for openshiftmonitoring ([27ee53e](https://github.com/ForomePlatform/oc-iac/commit/27ee53ef23bd50112c669f5513b589ac9ebb6040))
+* **teleport:** add teleport ([4d1dd38](https://github.com/ForomePlatform/oc-iac/commit/4d1dd38a606c7a935a8c6d5631348bf8dcf07f7f))
+
+
+### 🛠 Fixes
+
+* argocd appsets to directory generator ([75b8a6c](https://github.com/ForomePlatform/oc-iac/commit/75b8a6cda5e69c0cbee638d6ba4e7d077e872b73))
+* **argocd:** add anyid role ([8fd9610](https://github.com/ForomePlatform/oc-iac/commit/8fd96108aa80b15da0b0cb667850010a86bd86d0))
+* **argocd:** disable ingress ([bec5118](https://github.com/ForomePlatform/oc-iac/commit/bec511886f2225bac8900ec79f61faa9f16d3873))
+* **argocd:** repoUrl in values fix ([b50c659](https://github.com/ForomePlatform/oc-iac/commit/b50c6594a99e9f8097ed11a58bb4ab09f7dbb3a9))
+* **grafana:** fix jwks teleport and enable autojoin ([0c04764](https://github.com/ForomePlatform/oc-iac/commit/0c047640286a9b8cf16c8872fc170a73052ac82d))
+* **grafana:** fix orgid for export dashobards ([8df3ada](https://github.com/ForomePlatform/oc-iac/commit/8df3adaba95cb0e505e93c5e587b27c5973df0b8))
+* **logs:** issuer not cluster issuer ([c36da1b](https://github.com/ForomePlatform/oc-iac/commit/c36da1b922d854e13a1c88f13a859c82dcf6597f))
+* **logs:** remove pods yaml ([794fb7e](https://github.com/ForomePlatform/oc-iac/commit/794fb7e3843fd1b7da5b06520aadd2d0b657133f))
+* **loki:** add fake secrets ([3e43bb0](https://github.com/ForomePlatform/oc-iac/commit/3e43bb0b0be6d6449fad4c0b2826c31f3f6f04b8))
+* **loki:** add priveleged for promtail ([a3e100c](https://github.com/ForomePlatform/oc-iac/commit/a3e100c6a1c80193b39bcc77a233536895e45404))
+* **loki:** fix message lenght ([0bdb76f](https://github.com/ForomePlatform/oc-iac/commit/0bdb76f947c76a739a6f1d5f0ac0cc424428859e))
+* **monitoring:** fullnameovveride for pushgateway ([498b17f](https://github.com/ForomePlatform/oc-iac/commit/498b17f8323c3f714c0697bd2eddd50fa456ceef))
+* **monitoring:** try friendship for openshift and already monitoring ([bc0b47a](https://github.com/ForomePlatform/oc-iac/commit/bc0b47a860033ecdc290e1cd42711c65bdd46699))
+* **oncall:** add priveleged role and bump version ([4b7ada7](https://github.com/ForomePlatform/oc-iac/commit/4b7ada774c8bb1fb893e4182403ba5a6a689f52a))
+* **oncall:** dependency from local chart ([2ad5c3d](https://github.com/ForomePlatform/oc-iac/commit/2ad5c3d513faf96c9b6bf696d8db954f2b98414b))
+
+
+### 🛺 CI/CD
+
+* fix commit for pre-commit hooks valid ([b4905e1](https://github.com/ForomePlatform/oc-iac/commit/b4905e1f8b70b4ccee0d28bd076d12afc7e9b0d0))
+* remove chore from release notes ([8480856](https://github.com/ForomePlatform/oc-iac/commit/848085602463db2a2589b884711153045622f101))
+
 ## [1.1.0](https://github.com/ForomePlatform/oc-iac/compare/1.0.0...1.1.0) (2022-08-17)
 
 
