@@ -1,0 +1,17 @@
+kind: app
+version: v3
+metadata:
+  name: anfisa-port
+  description: "Forome anfisa port"
+  labels:
+    hostname: openshift
+spec:
+  uri: "https://port.forome.dev"
+  public_addr: port.forome.dev
+  rewrite:
+    redirect:
+      - "port.forome.dev"
+    headers:
+      - Name: Host
+        Value: port.forome.dev
+  insecure_skip_verify: true

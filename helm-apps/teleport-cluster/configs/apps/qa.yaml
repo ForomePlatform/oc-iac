@@ -1,0 +1,17 @@
+kind: app
+version: v3
+metadata:
+  name: anfisa-qa
+  description: "Forome anfisa qa"
+  labels:
+    hostname: openshift
+spec:
+  uri: "https://qa.forome.dev"
+  public_addr: qa.forome.dev
+  rewrite:
+    redirect:
+      - "qa.forome.dev"
+    headers:
+      - Name: Host
+        Value: qa.forome.dev
+  insecure_skip_verify: true

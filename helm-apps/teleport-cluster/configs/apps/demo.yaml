@@ -1,0 +1,17 @@
+kind: app
+version: v3
+metadata:
+  name: demo
+  description: "Forome anfisa demo"
+  labels:
+    hostname: openshift
+spec:
+  uri: "https://app.demo.forome.org"
+  public_addr: app.demo.forome.org
+  rewrite:
+    redirect:
+      - "app.demo.forome.org"
+    headers:
+      - Name: Host
+        Value: app.demo.forome.org
+  insecure_skip_verify: true

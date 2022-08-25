@@ -1,0 +1,104 @@
+
+clusterName: "teleport.forome.dev"
+kubeClusterName: "oc-ibm"
+teleportVersionOverride: "10.1.4"
+authenticationType: local
+authenticationSecondFactor:
+  secondFactor: "off"
+proxyListenerMode: "multiplex"
+sessionRecording: ""
+separatePostgresListener: false
+separateMongoListener: false
+publicAddr: []
+kubePublicAddr: []
+mongoPublicAddr: []
+mysqlPublicAddr: []
+postgresPublicAddr: []
+sshPublicAddr: []
+tunnelPublicAddr: []
+acme: false
+acmeURI: ""
+enterprise: false
+operator:
+  enabled: false
+  image: quay.io/gravitational/teleport-operator
+  resources: {}
+podSecurityPolicy:
+  enabled: true
+labels: {}
+chartMode: custom
+persistence:
+  enabled: true
+  existingClaimName: ""
+  volumeSize: 10Gi
+aws:
+  region: ""
+  backendTable: ""
+  auditLogTable: ""
+  auditLogMirrorOnStdout: false
+  sessionRecordingBucket: ""
+  backups: false
+  dynamoAutoScaling: false
+  readMinCapacity: null
+  readMaxCapacity: null
+  readTargetValue: null
+  writeMinCapacity: null
+  writeMaxCapacity: null
+  writeTargetValue: null
+gcp:
+  projectId: ""
+  backendTable: ""
+  auditLogTable: ""
+  auditLogMirrorOnStdout: false
+  sessionRecordingBucket: ""
+  credentialSecretName: ""
+highAvailability:
+  replicaCount: 1
+  requireAntiAffinity: false
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+  certManager:
+    addCommonName: true
+    enabled: false
+    issuerName: "clusterissuer-prom"
+    issuerKind: ClusterIssuer
+    issuerGroup: cert-manager.io
+tls:
+  existingSecretName: "teleport-tls"
+  existingCASecretName: ""
+image: quay.io/gravitational/teleport
+enterpriseImage: quay.io/gravitational/teleport-ent
+log:
+  level: INFO
+  output: stderr
+  format: text
+  extraFields: ["timestamp", "level", "component", "caller"]
+affinity: {}
+annotations:
+  config: {}
+  deployment: {}
+  pod: {}
+  service:
+    service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "nlb"
+  serviceAccount: {}
+  certSecret: {}
+service:
+  type: LoadBalancer
+  spec:
+    clusterIP: 172.21.111.4
+
+extraArgs: []
+extraEnv: []
+extraVolumes: []
+extraVolumeMounts: []
+imagePullPolicy: IfNotPresent
+initContainers: []
+postStart:
+  command: []
+resources: {}
+securityContext:
+  runAsUser: 0
+priorityClassName: ""
+tolerations: []
+probeTimeoutSeconds: 1
