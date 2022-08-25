@@ -10,6 +10,10 @@
     - [Manually install apps](#manually-install-apps)
     - [Manually release](#manually-release)
   - [Using software](#using-software)
+    - [Gitops](#gitops)
+    - [Develop](#develop)
+    - [Monitoring](#monitoring)
+    - [Access](#access)
 
 
 ## Summary
@@ -67,11 +71,28 @@ semantic-release --ci false
 
 ## Using software
 
+
+### Gitops
+
 Argocd
-helm
-semantic-release
-sops
+
+Helm
+
+Sops
+
+### Develop
+
 pre-commit-hooks
-teleport
-grafana
-prometheus
+
+semantic-release
+
+### Monitoring 
+Grafana
+
+Loki
+
+prometheus-operator
+
+### Access
+
+Teleport
