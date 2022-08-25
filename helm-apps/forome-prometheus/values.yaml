@@ -9,6 +9,15 @@ kube-prometheus-stack:
   additionalPrometheusRulesMap:
     rule-name:
       groups:
+      - name: meta
+        rules:
+        - alert: heartbeat
+          expr: vector(1)
+          labels:
+            severity: none
+          annotations:
+            description: This is heartbeat alert
+            summary: Alerting Amixr
       - name: node
         rules:
         - alert: HostHighCpuLoad
@@ -130,17 +139,25 @@ kube-prometheus-stack:
         receiver: "null"
         repeat_interval: 12h
         routes:
+        - match:
+            alertname: heartbeat
+          receiver: 'amixr-heartbeat'
+          group_wait: 0s
+          group_interval: 1m
+          repeat_interval: 50s
         - matchers:
-          - alertname =~ "InfoInhibitor|Watchdog"
+          - alertname =~ "InfoInhibitor|Watchdog|heartbeat"
           receiver: "null"
         - continue: true
           matchers:
           - severity =~ "warning|critical"
           receiver: slack-notifications
         - matchers:
-          - alertname !~ "InfoInhibitor|Watchdog"
+          - alertname !~ "InfoInhibitor|Watchdog|heartbeat"
           continue: true
           receiver: grafana_oncall
+
+
   coreDns:
     enabled: false
   defaultRules:
@@ -165,7 +182,30 @@ kube-prometheus-stack:
     enabled: false
   prometheus:
     prometheusSpec:
+      retentionSize: "19Gi"
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: ibmc-vpc-block-general-purpose
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+          selector: {}
       additionalScrapeConfigs:
+      - job_name: 'federate'
+        scrape_interval: 60s
+
+        honor_labels: true
+        metrics_path: '/federate'
+
+        static_configs:
+          - targets:
+            - 'prometheus-k8s.openshift-monitoring.svc:9091'
+        basic_auth:
+          username: '{{ .Values.openshift.username }}'
+          password: '{{ .Values.openshift.password }}'
+
       - job_name: node
         static_configs:
         - labels:
