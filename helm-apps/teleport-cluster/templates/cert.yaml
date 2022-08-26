@@ -16,6 +16,7 @@ spec:
   - "anfisa-port.teleport.forome.dev"
   - "anfisa-scicenter.teleport.forome.dev"
   - "mllogs.teleport.forome.dev"
+  - "argocd.teleport.forome.dev"
   issuerRef:
     name: clusterissuer-prom
     kind: ClusterIssuer

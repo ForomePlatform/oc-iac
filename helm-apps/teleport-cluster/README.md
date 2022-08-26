@@ -11,3 +11,10 @@ But we didnt want using external traffic for internal requests and here a `hack`
 ## Recreate
 
 When we set `config: custom` - teleport didng give us oportunity set strategy `recreate`
+
+## Apps and roles apply
+
+```sh
+tsh login --proxy teleport.forome.dev
+tctl create -f $FILE
+```
