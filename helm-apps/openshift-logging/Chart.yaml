@@ -1,6 +1,0 @@
-apiVersion: v2
-name: openshift-logging
-appVersion: v1.0.0
-version: 1.0.0
-description: 'Umbrella wraper for openshift-logging chart'
-dependencies: []
