@@ -289,8 +289,6 @@ argo-cd:
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
-          runAsGroup: 10001
-          runAsUser: 10001
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         volumeMounts:
