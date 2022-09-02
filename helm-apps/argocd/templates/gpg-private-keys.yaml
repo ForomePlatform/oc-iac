@@ -5,6 +5,6 @@ metadata:
 type: Opaque
 stringData:
   key.asc: |
-{{ .Values.gpgkey | nindent 4}}
+{{- .Values.gpgkey | nindent 4 }}
   githubtoken: |
-{{ .Values.githubtoken | nindent 4}}
+{{- .Values.githubtoken | nindent 4}}

@@ -10,7 +10,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
-  name: argocd-application-controller-anyid
+  name: argocd-application-controller
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -23,7 +23,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
-  name: argocd-applicationset-controller-anyid
+  name: argocd-applicationset-controller
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -36,7 +36,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
-  name: argocd-dex-server-anyid
+  name: argocd-dex-server
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -49,7 +49,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
-  name: argocd-notifications-controller-anyid
+  name: argocd-notifications-controller
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -62,7 +62,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
-  name: argocd-repo-server-anyid
+  name: argocd-repo-server
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -75,4 +75,18 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
-  name: argocd-server-anyid
+  name: argocd-server
+---
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-redis-anyid
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid-anyid
+subjects:
+- kind: ServiceAccount
+  namespace: {{ .Release.Namespace }}
+  name: argocd-redis

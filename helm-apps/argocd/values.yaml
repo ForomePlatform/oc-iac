@@ -105,6 +105,10 @@ argo-cd:
 
   ## Redis
   redis:
+    serviceAccount:
+      create: true
+      name: argocd-redis
+    name: ""
     enabled: true
     image:
       tag: 7.0.0-bullseye
