@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    logging.banzaicloud.io/default: watched
+  name: logging-loki-creds
+type: Opaque
+stringData:
+  password: {{ .Values.loki.password }}
+  username: {{ .Values.loki.username }}

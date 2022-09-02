@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: logging-operator-selfsigned-ca
+spec:
+  isCA: true
+  commonName: logging-operator-selfsigned-ca
+  secretName: logging-operator-ca-secret
+  privateKey:
+    algorithm: RSA
+    size: 4096
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: logging-operator-ca-issuer
+spec:
+  ca:
+    secretName: logging-operator-ca-secret

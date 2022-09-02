@@ -1,0 +1,248 @@
+logging-operator:
+  replicaCount: 1
+
+  image:
+    repository: ghcr.io/banzaicloud/logging-operator
+    # tag: 3.14.2
+    pullPolicy: IfNotPresent
+
+  extraArgs:
+    - -enable-leader-election=true
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+  namespaceOverride: ""
+
+  ## Pod custom labels
+  ##
+  podLabels: {}
+
+  annotations: {}
+
+  ## Deploy CRDs used by Logging Operator.
+  ##
+  createCustomResource: false
+
+  resources:
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  http:
+    # http listen port number
+    port: 8080
+    # Service definition for query http service
+    service:
+      type: ClusterIP
+      clusterIP: None
+      # Annotations to query http service
+      annotations: {}
+      # Labels to query http service
+      labels: {}
+
+  rbac:
+    enabled: true
+    psp:
+      enabled: true
+      annotations:
+        seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'docker/default,runtime/default'
+        seccomp.security.alpha.kubernetes.io/defaultProfileName: 'runtime/default'
+      ## Specify pod annotations
+      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
+      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
+      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
+
+
+
+  ## SecurityContext holds pod-level security attributes and common container settings.
+  ## This defaults to non root user with uid 1000 and gid 2000.	*v1.PodSecurityContext	false
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  ##
+  podSecurityContext: {}
+  #  runAsNonRoot: true
+  #  runAsUser: 1000
+  #  fsGroup: 2000
+  securityContext: {}
+  #  allowPrivilegeEscalation: false
+  #  readOnlyRootFilesystem: true
+    # capabilities:
+    #   drop: ["ALL"]
+
+  ## Operator priorityClassName
+  ##
+  priorityClassName: {}
+
+  monitoring:
+    # Create a Prometheus Operator ServiceMonitor object
+    serviceMonitor:
+      enabled: true
+      additionalLabels: {}
+      metricRelabelings: []
+      relabelings: []
+
+logging-operator-logging:
+  loggingRef: ""
+  # Disable configuration check before deploy
+  flowConfigCheckDisabled: false
+  # Use static configuration instead of generated config.
+  flowConfigOverride: ""
+
+  nameOverride: ""
+  fullnameOverride: ""
+
+  # If an immutable field is changed, delete the existing resource
+  # and recreate it with the new configuration.
+  enableRecreateWorkloadOnImmutableFieldChange: false
+
+  # Fluent-bit configurations https://banzaicloud.com/docs/one-eye/logging-operator/configuration/crds/#fluent-bit-spec
+  fluentbit:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    image:
+      repository: fluent/fluent-bit
+      # tag: 1.8.5
+    metrics:
+      serviceMonitor: true
+    tolerations:
+      - operator: Exists
+
+  #Node agent Definition
+  nodeAgents:
+  #  - name: win-agent
+  #    profile: windows
+  #    nodeAgentFluentbit:
+  #      daemonSet:
+  #        spec:
+  #          template:
+  #            spec:
+  #              containers:
+  #              - image: banzaicloud/fluentbit:1.8.5
+  #                name: fluent-bit
+  #      tls:
+  #        enabled: false
+    # - name: linux-agent
+    #   profile: linux
+    #   nodeAgentFluentbit:
+    #     metrics:
+    #       prometheusAnnotations: false
+    #       serviceMonitor: true
+    #     tls:
+    #       enabled: true
+    #       # Shared key for fluentd authentication
+    #       sharedKey: ""
+    #       fluentbitSecretName: "fluentbit-tls-secret"
+    #       fluentdSecretName: "fluentd-tls-secret"
+
+
+  # Fluentd configurations https://banzaicloud.com/docs/one-eye/logging-operator/configuration/crds/#fluentd-spec
+  fluentd:
+    ignoreSameLogInterval: 60s
+    ignoreRepeatedLogInterval: 60s
+    image:
+      repository: ghcr.io/banzaicloud/fluentd
+      # tag: v1.13.3-alpine-9
+    metrics:
+      serviceMonitor: true
+    scaling:
+      replicas: 1
+    disablePvc: true
+    configReloaderImage:
+      repository: jimmidyson/configmap-reload
+      # tag: v0.2.2
+  # 20Gi persistent storage is configured for fluentd by default.
+  # Here is an example, on how to override it:
+  #  bufferStorageVolume:
+  #    pvc:
+  #      spec:
+  #        accessModes:
+  #          - ReadWriteOnce
+  #        resources:
+  #          requests:
+  #            storage: 40Gi
+  # Enable secure connection between fluentd and fluent-bit
+  tls:
+    enabled: true
+    # Shared key for fluentd authentication
+    sharedKey: ""
+    fluentbitSecretName: "fluentbit-tls-secret"
+    fluentdSecretName: "fluentd-tls-secret"
+
+  # Limit namespaces from where to read Flow and Output specs
+  watchNamespaces: []
+  # Control namespace that contains ClusterOutput and ClusterFlow resources
+  controlNamespace: logging
+
+  # defaultFlow
+  defaultFlow: {}
+
+  # defaultFlow
+  globalFilters: []
+
+  # ClusterFlows to deploy
+  clusterFlows:
+    - name: clusterflow-allpods
+      spec:
+        globalOutputRefs:
+          - loki
+        filters:
+          - record_modifier:
+              records:
+                - host: ${record['kubernetes']['host'] or 'unknown'}
+                - app: ${record['kubernetes']['labels']['app.kubernetes.io/name'] or record['kubernetes']['labels']['app'] or 'unknown'}
+        match:
+          - select:
+            namespaces:
+              - anfisa-qa
+              - anfisa-test
+              - anfisa-port
+
+  # ClusterOutputs to deploy
+  clusterOutputs:
+    - name: loki
+      spec:
+        loki:
+          buffer:
+            flush_interval: 5s
+            flush_mode: interval
+            flush_thread_count: 8
+            retry_forever: false
+            retry_wait: 10s
+            tags: tag,time,app
+            timekey: 2m
+            timekey_use_utc: true
+            timekey_wait: 30s
+          configure_kubernetes_labels: false
+          extract_kubernetes_labels: false
+          remove_keys:
+            - "kubernetes"
+            - "project"
+            - "fluentd_thread"
+          extra_labels:
+            cluster: oc-ibm
+          labels:
+            container: "$.kubernetes.container_name"
+            namespace: "$.kubernetes.namespace_name"
+            app: ""
+            host: ""
+            project: "$.kubernetes.namespace_name"
+            pod: "$.kubernetes.pod_name"
+            env: "$.kubernetes.namespace_name"
+          url: http://loki.loki.svc.cluster.local:3100
