@@ -17,4 +17,7 @@ When we set `config: custom` - teleport didng give us oportunity set strategy `r
 ```sh
 tsh login --proxy teleport.forome.dev
 tctl create -f $FILE
+
+cd configs 
+./apply.sh
 ```

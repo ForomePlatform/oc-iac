@@ -1,0 +1,66 @@
+kind: role
+metadata:
+  name: admins
+spec:
+  allow:
+    app_labels:
+      '*': '*'
+    db_labels:
+      '*': '*'
+    db_names:
+    - '*'
+    db_users:
+    - '*'
+    impersonate:
+      roles:
+      - '*'
+      users:
+      - '*'
+    join_sessions:
+    - kinds:
+      - k8s
+      - ssh
+      modes:
+      - observer
+      name: admins
+      roles:
+      - admins
+    kubernetes_groups:
+    - system:masters
+    kubernetes_labels:
+      '*': '*'
+    logins:
+    - '{{internal.logins}}'
+    - root
+    - git
+    node_labels:
+      '*': '*'
+    rules:
+    - resources:
+      - '*'
+      verbs:
+      - '*'
+    windows_desktop_labels:
+      '*': '*'
+    windows_desktop_logins:
+    - '{{external.email}}'
+    - '{{external.logins}}'
+  deny: {}
+  options:
+    cert_format: standard
+    create_host_user: false
+    desktop_clipboard: true
+    desktop_directory_sharing: true
+    enhanced_recording:
+    - command
+    - network
+    forward_agent: true
+    max_session_ttl: 12h0m0s
+    permit_x11_forwarding: true
+    pin_source_ip: false
+    port_forwarding: true
+    record_session:
+      default: best_effort
+      desktop: true
+    ssh_file_copy: null
+version: v4

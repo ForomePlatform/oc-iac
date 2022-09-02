@@ -5,6 +5,7 @@ metadata:
   description: "Forome anfisa dev"
   labels:
     hostname: openshift
+    qa: access
 spec:
   uri: "https://anfisa.forome.dev"
   public_addr: "anfisa.forome.dev"
