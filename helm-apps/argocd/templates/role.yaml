@@ -6,7 +6,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
@@ -19,7 +19,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
@@ -32,7 +32,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
@@ -45,7 +45,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
@@ -58,7 +58,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
@@ -71,12 +71,11 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
   name: argocd-server
----
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -85,7 +84,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: system:openshift:scc:anyuid-anyid
+  name: system:openshift:scc:anyuid
 subjects:
 - kind: ServiceAccount
   namespace: {{ .Release.Namespace }}
