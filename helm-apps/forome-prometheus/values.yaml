@@ -193,7 +193,6 @@ kube-prometheus-stack:
             resources:
               requests:
                 storage: 20Gi
-          selector: {}
       additionalScrapeConfigs:
       - job_name: 'federate'
         scrape_interval: 60s
