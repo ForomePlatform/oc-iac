@@ -18,7 +18,9 @@ data:
       enabled: true
       cluster_name: {{ .Values.clusterName }}
       authentication:
-        type: local
+        type: oidc
+        second_factor: off
+        local_auth: true
         second_factor: off
       proxy_listener_mode: multiplex
       tokens:
