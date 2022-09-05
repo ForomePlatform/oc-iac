@@ -1,4 +1,6 @@
 kube-prometheus-stack:
+  nodeExporter:
+    enabled: false
   prometheusOperator:
     enabled: true
     denyNamespaces:
