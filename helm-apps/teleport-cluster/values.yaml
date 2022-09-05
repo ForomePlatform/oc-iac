@@ -90,7 +90,15 @@ service:
 
 extraArgs: []
 extraEnv: []
-extraVolumes: []
+extraVolumes:
+  - name: nginx-conf
+    configMap:
+      name: nginx-conf # place ConfigMap `nginx-conf` on /etc/nginx
+      items:
+        - key: nginx.conf
+          path: nginx.conf
+        - key: virtualhost.conf
+          path: virtualhost/virtualhost.conf # dig directory
 extraVolumeMounts: []
 imagePullPolicy: IfNotPresent
 initContainers: []

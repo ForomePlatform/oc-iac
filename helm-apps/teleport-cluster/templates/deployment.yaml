@@ -241,6 +241,14 @@ spec:
         - mountPath: /var/lib/teleport
           name: "data"
 {{ end }}
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/nginx
+          readOnly: true
+          name: nginx-conf
       volumes:
 {{- if .Values.enterprise }}
       - name: license
