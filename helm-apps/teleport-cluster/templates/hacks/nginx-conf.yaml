@@ -31,6 +31,7 @@ data:
             return 307 https:/$host$request_uri;
           }
           location /.well-known/ {
+            proxy_set_header Host $host;
             proxy_pass http://router-default.openshift-ingress.svc.cluster.local:80;
           }
       }
