@@ -108,7 +108,7 @@ argo-cd:
     serviceAccount:
       create: true
       name: argocd-redis
-    name: ""
+    name: "redis"
     enabled: true
     image:
       tag: 7.0.0-bullseye

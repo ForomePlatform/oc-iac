@@ -1,0 +1,43 @@
+kind: role
+metadata:
+  name: front
+spec:
+  allow:
+    app_labels:
+      front: access
+    logins:
+    - '{{internal.logins}}'
+    node_labels:
+      front: access
+    rules:
+    - resources:
+      - event
+      verbs:
+      - list
+      - read
+    - resources:
+      - session
+      verbs:
+      - read
+      - list
+      where: contains(session.participants, user.metadata.name)
+  deny:
+    logins:
+    - guest
+  options:
+    cert_format: standard
+    create_host_user: false
+    desktop_clipboard: true
+    desktop_directory_sharing: true
+    enhanced_recording:
+    - command
+    - network
+    forward_agent: false
+    max_session_ttl: 24h0m0s
+    pin_source_ip: false
+    port_forwarding: true
+    record_session:
+      default: best_effort
+      desktop: true
+    ssh_file_copy: null
+version: v5
