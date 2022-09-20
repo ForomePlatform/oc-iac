@@ -25,3 +25,32 @@ subjects:
 - kind: ServiceAccount
   name: prometheus-kube-prometheus-admission
   namespace: forome-prometheus
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-prometheus-admisson-anyid
+  namespace: forome-prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: pushgateway-prometheus-pushgateway
+  namespace: forome-prometheus
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-prometheus-admisson-anyid
+  namespace: forome-prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: blackbox-prometheus-blackbox-exporter
+  namespace: forome-prometheus
