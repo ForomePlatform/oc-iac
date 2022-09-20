@@ -29,7 +29,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: prometheus-prometheus-admisson-anyid
+  name: pushgateway-prometheus-pushgateway-anyid
   namespace: forome-prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -44,7 +44,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: prometheus-prometheus-admisson-anyid
+  name: blackbox-prometheus-blackbox-exporter-anyid
   namespace: forome-prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
