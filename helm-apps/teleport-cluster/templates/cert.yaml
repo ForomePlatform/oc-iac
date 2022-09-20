@@ -14,13 +14,12 @@ spec:
   - "anfisa-dev.teleport.forome.dev"
   - "anfisa-qa.teleport.forome.dev"
   - "anfisa-port.teleport.forome.dev"
+  - "anfisa-test.teleport.forome.dev"
   - "anfisa-scicenter.teleport.forome.dev"
   - "mllogs.teleport.forome.dev"
   - "argocd.teleport.forome.dev"
-  - "qa.teleport.forome.dev"
-  - "test.teleport.forome.dev"
-  - "dev.teleport.forome.dev"
-  - "demo.teleport.forome.dev"
+  - "loki.teleport.forome.dev"
+  - "prometheus.teleport.forome.dev"
   issuerRef:
     name: clusterissuer-prom
     kind: ClusterIssuer
