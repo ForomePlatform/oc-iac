@@ -2,14 +2,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ printf "%s-migrate-%s" (include "oncall.engine.fullname" .) (now | date "2006-01-02-15-04-05") }}
+  name: {{ printf "%s-migrate-%s" (include "oncall.engine.fullname" .) .Values.image.tag }}
   labels:
     {{- include "oncall.engine.labels" . | nindent 4 }}
 spec:
   ttlSecondsAfterFinished: 20
   template:
     metadata:
-      name: {{ printf "%s-migrate-%s" (include "oncall.engine.fullname" .) (now | date "2006-01-02-15-04-05") }}
+      name: {{ printf "%s-migrate-%s" (include "oncall.engine.fullname" .) .Values.image.tag }}
       {{- with .Values.podAnnotations }}
       annotations:
         random-annotation: {{ randAlphaNum 10 | lower }}
