@@ -6,9 +6,11 @@ metadata:
   labels:
     hostname: openshift
     qa: access
+    front: access
+    developers: access
 spec:
   uri: "https://qa.forome.dev"
-  public_addr: qa.forome.dev
+  # public_addr: qa.forome.dev
   rewrite:
     redirect:
       - "qa.forome.dev"

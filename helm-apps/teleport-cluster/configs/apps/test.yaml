@@ -5,9 +5,12 @@ metadata:
   description: "Forome anfisa test"
   labels:
     hostname: openshift
+    qa: access
+    front: access
+    developers: access
 spec:
   uri: "https://test.forome.dev"
-  public_addr: test.forome.dev
+  # public_addr: test.forome.dev
   rewrite:
     redirect:
       - "test.forome.dev"

@@ -1,0 +1,11 @@
+kind: app
+version: v3
+metadata:
+  name: prometheus
+  description: "Forome prometheus"
+  labels:
+    hostname: openshift
+    admins: access
+spec:
+  uri: "http://prometheus-kube-prometheus-prometheus.forome-prometheus.svc.cluster.local:9090"
+  insecure_skip_verify: true

@@ -1,10 +1,13 @@
 kind: app
 version: v3
 metadata:
-  name: demo
+  name: anfisa-demo
   description: "Forome anfisa demo"
   labels:
     hostname: openshift
+    qa: access
+    front: access
+    developers: access
 spec:
   uri: "https://app.demo.forome.org"
   public_addr: app.demo.forome.org

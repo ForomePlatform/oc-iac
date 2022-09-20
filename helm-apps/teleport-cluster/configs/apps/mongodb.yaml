@@ -5,6 +5,8 @@ metadata:
   description: "mongodb Forome anfisa qa"
   labels:
     qa: access
+    front: access
+    developers: access
     hostname: openshift
 spec:
   uri: "tcp://anfisa-mongodb.anfisa-qa.svc.cluster.local:27017"
@@ -16,6 +18,8 @@ metadata:
   description: "mongodb Forome anfisa test"
   labels:
     qa: access
+    front: access
+    developers: access
     hostname: openshift
 spec:
   uri: "tcp://anfisa-mongodb.anfisa-test.svc.cluster.local:27017"
@@ -28,6 +32,8 @@ metadata:
   description: "mongodb Forome anfisa port"
   labels:
     qa: access
+    front: access
+    developers: access
     hostname: openshift
 spec:
   uri: "tcp://anfisa-mongodb.anfisa-port.svc.cluster.local:27017"
@@ -40,6 +46,8 @@ metadata:
   description: "mongodb Forome anfisa dev"
   labels:
     qa: access
+    front: access
+    developers: access
     hostname: dev
 spec:
   uri: "tcp://localhost:27017"
@@ -50,7 +58,6 @@ metadata:
   name: mongodb-demo
   description: "mongodb Forome anfisa demo"
   labels:
-    qa: access
     hostname: demo
 spec:
   uri: "tcp://localhost:27017"

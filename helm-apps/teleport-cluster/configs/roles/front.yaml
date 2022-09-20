@@ -7,6 +7,7 @@ spec:
       front: access
     logins:
     - '{{internal.logins}}'
+    - front
     node_labels:
       front: access
     rules:
@@ -32,7 +33,7 @@ spec:
     enhanced_recording:
     - command
     - network
-    forward_agent: false
+    forward_agent: true
     max_session_ttl: 24h0m0s
     pin_source_ip: false
     port_forwarding: true

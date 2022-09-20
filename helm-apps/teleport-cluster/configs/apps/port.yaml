@@ -5,6 +5,9 @@ metadata:
   description: "Forome anfisa port"
   labels:
     hostname: openshift
+    qa: access
+    front: access
+    developers: access
 spec:
   uri: "https://port.forome.dev"
   public_addr: port.forome.dev

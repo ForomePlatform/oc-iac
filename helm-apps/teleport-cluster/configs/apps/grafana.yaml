@@ -6,6 +6,8 @@ metadata:
   labels:
     hostname: openshift
     qa: access
+    front: access
+    developers: access
 spec:
   # public_addr: grafana.teleport.forome.dev
   uri: "http://grafana.grafana.svc.cluster.local"
