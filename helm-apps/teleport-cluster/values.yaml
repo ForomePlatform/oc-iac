@@ -1,7 +1,7 @@
 
 clusterName: "teleport.forome.dev"
 kubeClusterName: "oc-ibm"
-teleportVersionOverride: "10.2.1"
+teleportVersionOverride: "10.2.2"
 authenticationType: local
 authenticationSecondFactor:
   secondFactor: "off"
