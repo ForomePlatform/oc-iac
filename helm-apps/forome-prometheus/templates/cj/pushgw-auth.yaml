@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pushgw-auth
+  namespace: forome-prometheus
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - /configmap/pushgw.sh
+            env:
+            - name: TARGET_LIST
+              value: |
+                https://anfisa.forome.dev
+                https://scicenter.forome.dev
+            - name: FOROME_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: forome-prometheus-auth
+                  optional: false
+            - name: FOROME_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: forome-prometheus-auth
+                  optional: false
+            image: jonlabelle/network-tools
+            imagePullPolicy: IfNotPresent
+            name: pushgw-auth
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /configmap
+              name: configmap
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - configMap:
+              defaultMode: 511
+              name: pushgw
+            name: configmap
+  schedule: 10/20 * * * *
+  successfulJobsHistoryLimit: 1
+  suspend: false

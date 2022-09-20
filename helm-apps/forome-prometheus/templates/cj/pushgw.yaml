@@ -1,0 +1,42 @@
+apiVersion: v1
+data:
+  pushgw.sh: |
+    #!/bin/bash
+    if [[ "${FOROME_USERNAME-}" && "${FOROME_PASSWORD-}" ]]; then
+        auth="-u $FOROME_USERNAME:$FOROME_PASSWORD"
+    fi
+    function curl_check () {
+        curl --connect-timeout 5 --fail -s $(echo "$auth") "$1/app/dirinfo" -H 'Accept: application/json'
+    }
+    declare -a target_list=( $(echo "$TARGET_LIST") )
+    for target in "${target_list[@]}"; do
+        if [ "$(curl_check "$target")" ]; then
+            ds_length=$(curl_check "$target" | jq ".[\"ds-list\"] | length")
+        else
+            ds_length=0
+        fi
+        target_base64=$(echo -n "$target" | base64)
+        echo "ds_list $ds_length" | curl -s --data-binary @- \
+        http://pushgateway-prometheus-pushgateway:9091/metrics/job/pushgw/target@base64/$target_base64
+        echo "$target = $ds_length"
+    done
+  pushgw_url.sh: |
+    #!/bin/bash
+    function check_url () {
+        wget -q --spider "$1"
+    }
+    declare -a target_list=( $(echo "$TARGET_LIST") )
+    for target in "${target_list[@]}"; do
+        if check_url "$target"; then
+            status=0
+        else
+            status=1
+        fi
+        target_base64=$(echo -n "$(basename "$target")" | base64)
+        echo "url_status $status" | curl -s --data-binary @- \
+        http://pushgateway-prometheus-pushgateway:9091/metrics/job/pushgw/target@base64/$target_base64
+        echo "$target $status"
+    done
+kind: ConfigMap
+metadata:
+  name: pushgw

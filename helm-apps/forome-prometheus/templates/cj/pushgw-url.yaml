@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pushgw-url
+  namespace: forome-prometheus
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - /configmap/pushgw_url.sh
+            env:
+            - name: TARGET_LIST
+              value: |
+                https://forome-dataset-public.s3.us-south.cloud-object-storage.appdomain.cloud/pgp3140_wgs_hlpanel.zip
+                https://forome-dataset-public.s3.us-south.cloud-object-storage.appdomain.cloud/gene_db.zip
+                https://forome-dataset-public.s3.us-south.cloud-object-storage.appdomain.cloud/pgp3140_wgs_nist-v4.2.tar.gz
+                https://www.dropbox.com/s/4dvunn3dusqc636/SEQaBOO_output_template_20190317.xlsx
+            image: jonlabelle/network-tools
+            imagePullPolicy: IfNotPresent
+            name: pushgw-url
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /configmap
+              name: configmap
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - configMap:
+              defaultMode: 511
+              name: pushgw
+            name: configmap
+  schedule: 10 */2 * * *
+  successfulJobsHistoryLimit: 1
+  suspend: false
+status:
+  lastScheduleTime: "2022-09-20T10:10:00Z"
