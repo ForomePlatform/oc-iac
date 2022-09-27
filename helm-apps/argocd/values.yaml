@@ -219,8 +219,6 @@ argo-cd:
     ## Environment variables to pass to argocd-repo-server
     ##
     env:
-      - name: "SOPS_GCP_KMS_IDS"
-        value: "projects/em-infrastructure/locations/global/keyRings/sops/cryptoKeys/sops-key"
       - name: HELM_PLUGINS
         value: /custom-tools/helm-plugins/
       - name: HELM_SECRETS_SOPS_PATH
