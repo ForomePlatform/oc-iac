@@ -1,3 +1,58 @@
+## [2.1.0](https://github.com/ForomePlatform/oc-iac/compare/2.0.0...2.1.0) (2022-09-27)
+
+
+### :scissors: Refactor
+
+* remove opeshiftmonitoring ([ef5cf5e](https://github.com/ForomePlatform/oc-iac/commit/ef5cf5ef7ba0b0296a1c0beebacabb2a8ba1d058))
+
+
+### 📔 Docs
+
+* add tctl insturction for teleport ([1647b5d](https://github.com/ForomePlatform/oc-iac/commit/1647b5d1f228c80d22eafe1fbfa29cc747415420))
+* add using software ([efc2e4d](https://github.com/ForomePlatform/oc-iac/commit/efc2e4d5b20168c6de7b3990a5d3fd4976dcc064))
+
+
+### 🚀 Features
+
+* add front role ([11cc75c](https://github.com/ForomePlatform/oc-iac/commit/11cc75c6321d6702671ad5ef19561e2c249404e8))
+* **grafana:** bump oncall version ([7d796fd](https://github.com/ForomePlatform/oc-iac/commit/7d796fd3a9897332fdb082d4ae2ce71b3fee5e53))
+* **logging:** add logging-operator ([ad95bc2](https://github.com/ForomePlatform/oc-iac/commit/ad95bc2c089b7a8ed68e99a7b2fe052bbb31659d))
+* **oncall:** bump to v1.0.35 ([de0ba1c](https://github.com/ForomePlatform/oc-iac/commit/de0ba1c2bd2f144acbfa5b9b3e627f6e0c386ce4))
+* **teleport:** add wa for using cert-manager ingress http01 challenges and redirect to https ([bb65b80](https://github.com/ForomePlatform/oc-iac/commit/bb65b802fe3451c36d6ac1a7d86fe3ffa558f4f9))
+* **teleport:** bump to 10.1.9 ([fc43359](https://github.com/ForomePlatform/oc-iac/commit/fc4335917e315fb77afa2e6ec1eef40819f43b3e))
+* **teleport:** bump to 10.2.1 ([343bd4e](https://github.com/ForomePlatform/oc-iac/commit/343bd4e4b242512a2d15d61c36fd0976179f88a6))
+* **teleport:** bump to 10.2.2 ([1bcbd37](https://github.com/ForomePlatform/oc-iac/commit/1bcbd37f78559a45f16f89cf52473655c5c8a6cf))
+* **teleport:** move to oidc default auth ([cc51595](https://github.com/ForomePlatform/oc-iac/commit/cc51595dda8461ddd8eca6edf2940676ad303571))
+
+
+### 🛠 Fixes
+
+* **argocd:** fix anyid issues ([a878f3f](https://github.com/ForomePlatform/oc-iac/commit/a878f3f0c1c2e0a05ec568f50edd5873efa34748))
+* **argocd:** fix redis name ([a2c0a55](https://github.com/ForomePlatform/oc-iac/commit/a2c0a55d281f0009a077a740074e11a6b3bc2738))
+* **argocd:** fix roles ref ([621994e](https://github.com/ForomePlatform/oc-iac/commit/621994e25f8afd2288562694e208f7531d7a5d8f))
+* **argocd:** gpg with extra whitespace ([5ce4943](https://github.com/ForomePlatform/oc-iac/commit/5ce494309b5a7340458926b2594535407d2740f1))
+* **grafana:** add autosigup for teleport ([216290b](https://github.com/ForomePlatform/oc-iac/commit/216290b08f799cd91c510b7cdbad8beb52d419f7))
+* **logs:** update chart vserion ([5c3b3a0](https://github.com/ForomePlatform/oc-iac/commit/5c3b3a0e2e3bff6b019dc10d1b903fe6591da376))
+* **monitoring:** add cj and basic auth to git ([d9c818e](https://github.com/ForomePlatform/oc-iac/commit/d9c818e4cdfb590e7499e8cbb6d6954fc56d8b54))
+* **monitoring:** disable nodeexporter and add prometheus password for federate ([1ee0a9c](https://github.com/ForomePlatform/oc-iac/commit/1ee0a9c8fbb8386bd1d1fd5744ea80b21f2c51ed))
+* **monitoring:** rbac ([0f0c3a0](https://github.com/ForomePlatform/oc-iac/commit/0f0c3a09d3dfce142c960329dff756c351734313))
+* **monitoring:** rbac ([b811c04](https://github.com/ForomePlatform/oc-iac/commit/b811c044f081e44d738cd676b3040d6efd709d37))
+* **monitoring:** rbac ([c7e55d8](https://github.com/ForomePlatform/oc-iac/commit/c7e55d83d161fa083420fab94f9facc057f0c051))
+* **monitoring:** remove spec from pvc ([40b9616](https://github.com/ForomePlatform/oc-iac/commit/40b9616cadf188f50a922722b5401d1bd75dfab6))
+* **oncall:** migrate just image version ([c0d8071](https://github.com/ForomePlatform/oc-iac/commit/c0d8071f95bdc296d359fdd7a842775290aeb588))
+* **teleport-cluster:** add 80 port for http01 challenges ([09cbe55](https://github.com/ForomePlatform/oc-iac/commit/09cbe55f79fe1dd84ff0e267474297c027e8088c))
+* **teleport-cluster:** add some changes in roles/apps ([ec2834c](https://github.com/ForomePlatform/oc-iac/commit/ec2834c572fb9f0ae5e4566d54007fb887641178))
+* **teleport:** add host header for proxy_pass ([a736eab](https://github.com/ForomePlatform/oc-iac/commit/a736eab11bced2d270e0884d60f537e9d1fc3d36))
+* **teleport:** add more certs ([d5a89c0](https://github.com/ForomePlatform/oc-iac/commit/d5a89c0f2304497af76deb50b315d95204709673))
+* **teleport:** applications and roles ([4300a12](https://github.com/ForomePlatform/oc-iac/commit/4300a12fd457d67226c69e085365c14c3a53737e))
+* **teleport:** bump to 10.2.4 and add applications ([e47fc4d](https://github.com/ForomePlatform/oc-iac/commit/e47fc4d0b5f1dca16e5a2952dc58e1eda39ffefb))
+* **teleport:** double second factor ([de8c895](https://github.com/ForomePlatform/oc-iac/commit/de8c895009653355ca521e50451827667467c0b7))
+
+
+### 🛺 CI/CD
+
+* semantic-release not dryrun ([5fe78a3](https://github.com/ForomePlatform/oc-iac/commit/5fe78a35e394c7a8f924444b12e7be2f1b9262f3))
+
 ## [2.0.0](https://github.com/ForomePlatform/oc-iac/compare/1.0.0...2.0.0) (2022-08-25)
 
 
