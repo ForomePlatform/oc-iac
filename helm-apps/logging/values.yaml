@@ -123,6 +123,9 @@ logging-operator-logging:
       serviceMonitor: true
     tolerations:
       - operator: Exists
+    security:
+      securityContext:
+        privileged: true
 
   #Node agent Definition
   nodeAgents:
@@ -209,10 +212,10 @@ logging-operator-logging:
                 - app: ${record['kubernetes']['labels']['app.kubernetes.io/name'] or record['kubernetes']['labels']['app'] or 'unknown'}
         match:
           - select:
-            namespaces:
-              - anfisa-qa
-              - anfisa-test
-              - anfisa-port
+              namespaces:
+                - anfisa-qa
+                - anfisa-test
+                - anfisa-port
 
   # ClusterOutputs to deploy
   clusterOutputs:
