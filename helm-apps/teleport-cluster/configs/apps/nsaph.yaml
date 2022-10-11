@@ -15,3 +15,15 @@ spec:
     redirect:
       - "localhost"
   insecure_skip_verify: true
+---
+kind: app
+version: v3
+metadata:
+  name: nsaph-postgres
+  description: "nsaph postgres"
+  labels:
+    hostname: nsaph
+spec:
+  uri: "tcp://localhost:5432"
+  # public_addr: "anfisa.forome.dev"
+  insecure_skip_verify: true
