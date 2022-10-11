@@ -1,0 +1,17 @@
+kind: app
+version: v3
+metadata:
+  name: nsaph
+  description: "nsaph"
+  labels:
+    hostname: nsaph
+    qa: access
+    front: access
+    developers: access
+spec:
+  uri: "http://localhost:8280"
+  # public_addr: "anfisa.forome.dev"
+  rewrite:
+    redirect:
+      - "localhost"
+  insecure_skip_verify: true

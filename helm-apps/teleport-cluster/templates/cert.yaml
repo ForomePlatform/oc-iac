@@ -20,6 +20,7 @@ spec:
   - "argocd.teleport.forome.dev"
   - "loki.teleport.forome.dev"
   - "prometheus.teleport.forome.dev"
+  - "nsaph.teleport.forome.dev"
   issuerRef:
     name: clusterissuer-prom
     kind: ClusterIssuer
