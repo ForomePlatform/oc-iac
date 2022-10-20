@@ -15,7 +15,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: prometheus-prometheus-admisson-anyid
+  name: prometheus-kube-prometheus-admission-anyid
   namespace: forome-prometheus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -53,4 +53,46 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: blackbox-prometheus-blackbox-exporter
+  namespace: forome-prometheus
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-kube-prometheus-prometheus-anyid
+  namespace: forome-prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: prometheus-kube-prometheus-prometheus
+  namespace: forome-prometheus
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-kube-prometheus-alertmanager-anyid
+  namespace: forome-prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: prometheus-kube-prometheus-alertmanager
+  namespace: forome-prometheus
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prometheus-kube-prometheus-operator-anyid
+  namespace: forome-prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:openshift:scc:anyuid
+subjects:
+- kind: ServiceAccount
+  name: prometheus-kube-prometheus-operator
   namespace: forome-prometheus

@@ -1,0 +1,28 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  annotations:
+    meta.helm.sh/release-name: prometheus
+    meta.helm.sh/release-namespace: forome-prometheus
+  labels:
+    app: forome-prometheus-k8s-image-availability-exporter
+    app.kubernetes.io/instance: forome-prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: kube-prometheus-stack
+    app.kubernetes.io/version: 39.6.0
+    argocd.argoproj.io/instance: forome-prometheus
+    chart: kube-prometheus-stack-39.6.0
+    heritage: Helm
+    release: forome-prometheus
+  name: forome-prometheus-k8s-image-availability-exporter
+  namespace: forome-prometheus
+spec:
+  endpoints:
+  - interval: 90s
+    port: http
+  namespaceSelector:
+    matchNames:
+    - forome-prometheus
+  selector:
+    matchLabels:
+      app: forome-prometheus-k8s-image-availability-exporter
