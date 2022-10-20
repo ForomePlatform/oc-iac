@@ -4,7 +4,7 @@ metadata:
   name: anfisa-demo
   description: "Forome anfisa demo"
   labels:
-    hostname: openshift
+    hostname: demo
     qa: access
     front: access
     developers: access
@@ -17,4 +17,25 @@ spec:
     headers:
       - Name: Host
         Value: app.demo.forome.org
+  insecure_skip_verify: true
+---
+kind: app
+version: v3
+metadata:
+  name: anfisa-demo-druid
+  description: "Forome anfisa demo-druid"
+  labels:
+    hostname: demo
+    qa: access
+    front: access
+    developers: access
+spec:
+  uri: "http://localhost:8888"
+  public_addr: anfisa-demo-druid.teleport.forome.dev
+  rewrite:
+    redirect:
+      - "anfisa-demo-druid.teleport.forome.dev"
+    headers:
+      - Name: Host
+        Value: anfisa-demo-druid.teleport.forome.dev
   insecure_skip_verify: true

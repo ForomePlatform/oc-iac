@@ -4,12 +4,12 @@ metadata:
   name: anfisa-dev
   description: "Forome anfisa dev"
   labels:
-    hostname: dev-scicenter
+    hostname: dev
     qa: access
     front: access
     developers: access
 spec:
-  uri: "http://localhost:3000"
+  uri: "http://localhost:3042"
   # public_addr: "anfisa.forome.dev"
   rewrite:
     redirect:
@@ -22,7 +22,7 @@ metadata:
   name: anfisa-dev-druid
   description: "Forome anfisa dev-druid"
   labels:
-    hostname: openshift
+    hostname: dev
     qa: access
     front: access
     developers: access

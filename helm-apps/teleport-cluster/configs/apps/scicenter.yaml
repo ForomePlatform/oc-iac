@@ -4,12 +4,12 @@ metadata:
   name: anfisa-scicenter
   description: "Forome anfisa scicenter"
   labels:
-    hostname: dev-scicenter
+    hostname: dev
     qa: access
     front: access
     developers: access
 spec:
-  uri: "http://localhost:3005"
+  uri: "http://localhost:8190"
   # public_addr: "anfisa.forome.dev"
   rewrite:
     redirect:
@@ -22,12 +22,12 @@ metadata:
   name: anfisa-scicenter-druid
   description: "Forome anfisa scicenter-druid"
   labels:
-    hostname: openshift
+    hostname: dev
     qa: access
     front: access
     developers: access
 spec:
-  uri: "http://router.anfisa-.svc.cluster.local"
+  uri: "http://localhost:8888"
   public_addr: anfisa-scicenter-druid.teleport.forome.dev
   rewrite:
     redirect:

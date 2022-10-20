@@ -30,7 +30,7 @@ metadata:
     front: access
     developers: access
 spec:
-  uri: "http://router.anfisa-.svc.cluster.local"
+  uri: "http://router.anfisa-test.svc.cluster.local"
   public_addr: anfisa-test-druid.teleport.forome.dev
   rewrite:
     redirect:
