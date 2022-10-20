@@ -387,3 +387,14 @@ prometheus-blackbox-exporter:
           - HTTP/2.0
         prober: http
         timeout: 45s
+
+
+k8s-image-availability-exporter:
+  serviceMonitor:
+    enabled: true
+    interval: 90s
+
+  prometheusRule:
+    enabled: true
+    defaultGroupsEnabled: true
+    additionalGroups: []

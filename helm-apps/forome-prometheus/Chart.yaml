@@ -13,3 +13,6 @@ dependencies:
   - name: prometheus-pushgateway
     repository: https://prometheus-community.github.io/helm-charts
     version: 1.18.2
+  - name: k8s-image-availability-exporter
+    repository: https://charts.flant.com/common/github
+    version: '*.*.*'
