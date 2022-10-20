@@ -1,3 +1,20 @@
+## [2.2.0](https://github.com/ForomePlatform/oc-iac/compare/2.1.0...2.2.0) (2022-10-20)
+
+
+### 🚀 Features
+
+* **grafana:** bump oncall/grafana version ([f39583f](https://github.com/ForomePlatform/oc-iac/commit/f39583f3356fea88cc718ad66334caed9fc1234e))
+* **nsaph:** add nsaph to teleport ([ba24e6e](https://github.com/ForomePlatform/oc-iac/commit/ba24e6e2df7dcf4f1ec24750e1e2446a497e67bb))
+* **prom:** add image exporter ([8cb7b94](https://github.com/ForomePlatform/oc-iac/commit/8cb7b941029bec54a648bdb17a2d72880dc1439c))
+* **teleport:** bump to 10.3.2 and add druid console ([c6fad38](https://github.com/ForomePlatform/oc-iac/commit/c6fad382d3ce7e34a1d920a2f2824d2157ccf261))
+
+
+### 🛠 Fixes
+
+* **logging:** add security context and roles ([da2e213](https://github.com/ForomePlatform/oc-iac/commit/da2e21302ae30532003b20879df57a2567d0cdab))
+* **logoperator:** bumpt resources ([d4cb867](https://github.com/ForomePlatform/oc-iac/commit/d4cb867c631483a36fbdc00e663834ee60d77954))
+* **nsaph:** add postgresql for nsaph ([4db1ba4](https://github.com/ForomePlatform/oc-iac/commit/4db1ba44037c851e7470f45b2b23cb2518c1efa6))
+
 ## [2.1.0](https://github.com/ForomePlatform/oc-iac/compare/2.0.0...2.1.0) (2022-09-27)
 
 
