@@ -6,7 +6,7 @@ description: meta chart for grafana
 dependencies:
 - name: grafana
   repository: "https://grafana.github.io/helm-charts"
-  version: "6.*.*"
+  version: "*.*.*"
 - name: oncall
   version: "*.*.*"
   # repository: "https://grafana.github.io/helm-charts"
