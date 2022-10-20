@@ -15,3 +15,24 @@ spec:
     redirect:
       - "localhost"
   insecure_skip_verify: true
+---
+kind: app
+version: v3
+metadata:
+  name: anfisa-dev-druid
+  description: "Forome anfisa dev-druid"
+  labels:
+    hostname: openshift
+    qa: access
+    front: access
+    developers: access
+spec:
+  uri: "http://localhost:8888"
+  public_addr: anfisa-dev-druid.teleport.forome.dev
+  rewrite:
+    redirect:
+      - "anfisa-dev-druid.teleport.forome.dev"
+    headers:
+      - Name: Host
+        Value: anfisa-dev-druid.teleport.forome.dev
+  insecure_skip_verify: true

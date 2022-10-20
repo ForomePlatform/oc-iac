@@ -15,3 +15,24 @@ spec:
     redirect:
       - "localhost"
   insecure_skip_verify: true
+---
+kind: app
+version: v3
+metadata:
+  name: anfisa-scicenter-druid
+  description: "Forome anfisa scicenter-druid"
+  labels:
+    hostname: openshift
+    qa: access
+    front: access
+    developers: access
+spec:
+  uri: "http://router.anfisa-.svc.cluster.local"
+  public_addr: anfisa-scicenter-druid.teleport.forome.dev
+  rewrite:
+    redirect:
+      - "anfisa-scicenter-druid.teleport.forome.dev"
+    headers:
+      - Name: Host
+        Value: anfisa-scicenter-druid.teleport.forome.dev
+  insecure_skip_verify: true

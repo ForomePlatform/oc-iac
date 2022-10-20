@@ -18,3 +18,24 @@ spec:
       - Name: Host
         Value: test.forome.dev
   insecure_skip_verify: true
+---
+kind: app
+version: v3
+metadata:
+  name: anfisa-test-druid
+  description: "Forome anfisa port-druid"
+  labels:
+    hostname: openshift
+    qa: access
+    front: access
+    developers: access
+spec:
+  uri: "http://router.anfisa-.svc.cluster.local"
+  public_addr: anfisa-test-druid.teleport.forome.dev
+  rewrite:
+    redirect:
+      - "anfisa-test-druid.teleport.forome.dev"
+    headers:
+      - Name: Host
+        Value: anfisa-test-druid.teleport.forome.dev
+  insecure_skip_verify: true

@@ -21,6 +21,11 @@ spec:
   - "loki.teleport.forome.dev"
   - "prometheus.teleport.forome.dev"
   - "nsaph.teleport.forome.dev"
+  - "anfisa-qa-druid.teleport.forome.dev"
+  - "anfisa-demo-druid.teleport.forome.dev"
+  - "anfisa-port-druid.teleport.forome.dev"
+  - "anfisa-test-druid.teleport.forome.dev"
+  - "anfisa-scicenter-druid.teleport.forome.dev"
   issuerRef:
     name: clusterissuer-prom
     kind: ClusterIssuer
