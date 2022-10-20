@@ -184,7 +184,7 @@ kube-prometheus-stack:
     enabled: false
   prometheus:
     prometheusSpec:
-      retentionSize: "19Gi"
+      retentionSize: "19GB"
       storageSpec:
         volumeClaimTemplate:
           spec:
