@@ -99,7 +99,7 @@ Create the name of the service account to use
 
 {{- define "oncall.sysctl" }}
 - name: sysctl
-  image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+  image: "centos"
   imagePullPolicy: {{ .Values.image.pullPolicy }}
   command: ['sh', '-c', "sysctl -w net.core.somaxconn=1024"]
   securityContext:
