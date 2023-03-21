@@ -733,7 +733,7 @@ oncall:
   image:
     # Grafana OnCall docker image repository
     repository: grafana/oncall
-    tag: v1.0.40
+    tag: v1.1.40
     pullPolicy: IfNotPresent
 
   # Whether to create additional service for external connections
