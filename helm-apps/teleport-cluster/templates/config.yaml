@@ -31,6 +31,7 @@ data:
     proxy_service:
       public_addr: '{{ .Values.clusterName }}:443'
       enabled: true
+      https_keypairs_reload_interval: 1h
       https_keypairs:
       - key_file: /etc/teleport-tls/tls.key
         cert_file: /etc/teleport-tls/tls.crt
