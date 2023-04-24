@@ -6,4 +6,4 @@ description: 'Umbrella wraper for argocd chart'
 dependencies:
   - name: argo-cd
     repository:  https://argoproj.github.io/argo-helm
-    version: 5.27.1
+    version: 5.29.1
