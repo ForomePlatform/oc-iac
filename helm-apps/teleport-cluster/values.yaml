@@ -1,7 +1,7 @@
 
 clusterName: "teleport.forome.dev"
 kubeClusterName: "oc-ibm"
-teleportVersionOverride: "12.2.4"
+teleportVersionOverride: "13.0.2"
 authenticationType: local
 authenticationSecondFactor:
   secondFactor: "off"
@@ -67,7 +67,7 @@ highAvailability:
 tls:
   existingSecretName: "teleport-tls"
   existingCASecretName: ""
-image: quay.io/gravitational/teleport
+image: public.ecr.aws/gravitational/teleport-distroless
 enterpriseImage: quay.io/gravitational/teleport-ent
 log:
   level: INFO
